@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <title>Главная страница</title>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        kars_kz
+    </div>
+    <div class="search-container">
+        <input type="text" placeholder="Поиск...">
+        <button>Поиск</button>
+    </div>
+    <div class="search-container">
+        <a href="{{ url_for('create') }}"><button>Создать объявление</button></a>
+    </div>
+    <a href="{{ url_for('get_profile') }}"><button class="profile-button">Профиль</button></a>
+</header>
+<main>
+    <div class="posts-container">
+        {% for post in publick %}
+            <div class="post-card">
+                <h2 class="post-title">{{ post[1] }}</h2>  
+                <p class="post-description">Описание: {{ post[2] }}</p> 
+                <p class="post-price">Цена: {{ post[3] }} тг</p>
+            
+            {% if post[4] %}
+                <img src="{{ url_for('static', filename='uploads/' + post [4]) }}" alt="Изображение" style="max-width: 300px;">
+            {% else %}
+                <p>Нет изображения</p>
+            {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</main>
+
+
+
+</body>
+</html>
