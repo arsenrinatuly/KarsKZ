@@ -42,7 +42,7 @@ def create():
         description = request.form.get('description', type=str)
         price = request.form.get('price', type=int)
         image_filename = None   
-        image_path = None  # Инициализируем переменную здесь
+        image_path = None  
 
         image_file = request.files.get('path_photo')
         if image_file and image_file.filename:
