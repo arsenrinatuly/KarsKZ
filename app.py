@@ -27,10 +27,39 @@ def get_main():
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM post')
     posts = cursor.fetchall() 
-
     conn.close()
+
     return render_template('base.html', posts=posts)
 
+@app.route('/up', methods=['GET', 'POST'])
+def get_up():
+    conn = sqlite3.connect('post.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM post ORDER BY price')
+    posts = cursor.fetchall() 
+    conn.close()
+
+    return render_template('base.html', posts=posts)
+
+
+@app.route('/post<int:id>', methods=['GET', 'POST'])
+def get_details(id):
+    conn = sqlite3.connect('post.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM post WHERE id = ?', (id,))
+    post = cursor.fetchone()
+    conn.close()
+    return render_template('post.html', post=post)
+
+@app.route('/down', methods=['GET', 'POST'])
+def get_down():
+    conn = sqlite3.connect('post.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM post ORDER BY price DESC')
+    posts = cursor.fetchall() 
+    conn.close()
+
+    return render_template('base.html', posts=posts)
 
 @app.route('/profile', methods=['GET','POST'])
 def get_profile():

@@ -23,6 +23,10 @@
 </header>
 
 <main>
+    <div>
+        <a href="{{ url_for('get_down') }}"><button class="profile-button">По убыванию</button></a>
+        <a href="{{ url_for('get_up') }}"><button class="profile-button">По возрастанию</button></a>
+    </div>
     <div class="posts-container">
         {% for post in posts %}
             <div class="post-card">
@@ -34,6 +38,7 @@
                 {% if post[4] %}
                     <img src="{{ post[4] }}" alt="Post photo" class="post-photo">
                 {% endif %}
+                <a href="{{ url_for('get_details', id = post[0]) }}">Подробнее</a>
             </div>
         {% endfor %}
     </div>
